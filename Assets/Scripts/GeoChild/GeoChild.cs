@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeoChild : MonoBehaviour
 {
-    float _moveSpeed = 3;
+    float _moveSpeed = 30f;
     public string Name
     {
         get; set;
@@ -13,5 +13,10 @@ public class GeoChild : MonoBehaviour
     public float GetMoveSpeed()
     {
         return _moveSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log("Collision");    
     }
 }

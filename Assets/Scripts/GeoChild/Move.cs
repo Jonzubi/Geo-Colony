@@ -11,12 +11,14 @@ public class Move : MonoBehaviour
     GeoChild _geoChild;
     GameObject? targetFood;
     Vector2 randomPoint;
+    Rigidbody2D _rigidBody;
     float pickedRandomPointTime = 0;
 
     void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _geoChild = GetComponent<GeoChild>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -26,7 +28,6 @@ public class Move : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(randomPoint);
         if (targetFood == null)
             targetFood = GetClosestFood();
         
@@ -75,6 +76,6 @@ public class Move : MonoBehaviour
     void MoveToTarget(Vector2 target)
     {
         float step = _geoChild.GetMoveSpeed() * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target, step);
+        _rigidBody.MovePosition(Vector2.MoveTowards(transform.position, target, step));
     }
 }
