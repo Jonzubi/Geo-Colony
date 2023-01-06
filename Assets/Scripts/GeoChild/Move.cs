@@ -1,18 +1,73 @@
+#nullable enable
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float randomIdleMoveSeconds = 1;
+    GameManager _gameManager;
+    GeoChild _geoChild;
+    Food? targetFood;
+    Vector2 randomPoint;
+    float pickedRandomPointTime = 0;
+
+    void Awake()
     {
-        
+        _gameManager = FindObjectOfType<GameManager>();
+        _geoChild = GetComponent<GeoChild>();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        targetFood = GetClosestFood();
+    }
+
     void Update()
     {
+        Debug.Log(randomPoint);
+        if (targetFood == null)
+            targetFood = GetClosestFood();
         
+        // Still can't find food
+        if (targetFood == null)
+        {
+            // Random movement
+            if (randomPoint == null)
+                randomPoint = CommonFunctions.GetRandomPositionInCamera();
+            else
+            {
+                // Check last time point election
+                if (pickedRandomPointTime >= randomIdleMoveSeconds)
+                {
+                    // Pick new point
+                    randomPoint = CommonFunctions.GetRandomPositionInCamera();
+                    pickedRandomPointTime = 0;
+                }
+                else
+                    pickedRandomPointTime += Time.deltaTime;
+            }
+
+            float step = _geoChild.GetMoveSpeed() * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, randomPoint, step);
+        }
+    }
+
+    Food? GetClosestFood()
+    {
+        List<Food> foods = _gameManager.GetSpawnManager().Foods;
+        float minDist = Mathf.Infinity;
+        Food? closestFood = null;
+        foreach (var food in foods)
+        {
+            float dist = Vector2.Distance(food.transform.position, transform.position);
+            if (minDist > dist)
+            {
+                closestFood = food;
+                minDist = dist;
+            }
+        }
+        return closestFood;
     }
 }
