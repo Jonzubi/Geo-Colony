@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
     [SerializeField] float randomIdleMoveSeconds = 1;
     GameManager _gameManager;
     GeoChild _geoChild;
-    Food? targetFood;
+    GameObject? targetFood;
     Vector2 randomPoint;
     float pickedRandomPointTime = 0;
 
@@ -54,11 +54,11 @@ public class Move : MonoBehaviour
         }
     }
 
-    Food? GetClosestFood()
+    GameObject? GetClosestFood()
     {
-        List<Food> foods = _gameManager.GetSpawnManager().Foods;
+        List<GameObject> foods = _gameManager.GetSpawnManager().Foods;
         float minDist = Mathf.Infinity;
-        Food? closestFood = null;
+        GameObject? closestFood = null;
         foreach (var food in foods)
         {
             float dist = Vector2.Distance(food.transform.position, transform.position);

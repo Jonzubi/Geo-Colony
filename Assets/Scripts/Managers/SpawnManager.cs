@@ -6,14 +6,15 @@ public class SpawnManager : MonoBehaviour
 {
     #region Properties
         
-    public List<GeoChild> _geoChilds;
-    public List<Food> _foods;
+    public List<GameObject> _geoChilds;
+    public List<GameObject> _foods;
     [SerializeField] GameObject prefabGeoChild;
     [SerializeField] GameObject prefabFood;
 
     GameManager _gameManager;
+    float lastFoodSpawn = 0;
 
-    public List<GeoChild> GeoChildren
+    public List<GameObject> GeoChildren
     {
         get
         {
@@ -21,7 +22,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public List<Food> Foods
+    public List<GameObject> Foods
     {
         get
         {
@@ -38,10 +39,22 @@ public class SpawnManager : MonoBehaviour
         _gameManager = GetComponent<GameManager>();    
     }
 
+    void Update()
+    {
+        if (lastFoodSpawn >= _gameManager.GetConfigurationManager().SpawnFoodTime)
+        {
+            GameObject food = Instantiate(prefabFood, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+            Foods.Add(food);
+            lastFoodSpawn = 0;
+        }
+        else
+            lastFoodSpawn += Time.deltaTime;
+    }
+
     public SpawnManager()
     {
-        _geoChilds = new List<GeoChild>();
-        _foods = new List<Food>();
+        _geoChilds = new List<GameObject>();
+        _foods = new List<GameObject>();
     }
 
     #endregion
@@ -52,6 +65,6 @@ public class SpawnManager : MonoBehaviour
     {
         Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
     }
-    
+
     #endregion
 }
