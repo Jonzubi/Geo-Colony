@@ -63,7 +63,8 @@ public class SpawnManager : MonoBehaviour
         
     public void SpawnChild()
     {
-        Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+        GameObject geoChild = Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+        GeoChildren.Add(geoChild);
     }
 
     #endregion
