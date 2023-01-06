@@ -6,6 +6,8 @@ public class SpawnManager : MonoBehaviour
 {
     public List<GeoChild> _geoChilds;
     public List<Food> _foods;
+    [SerializeField] GameObject prefabGeoChild;
+    [SerializeField] GameObject prefabFood;
 
     public SpawnManager()
     {
