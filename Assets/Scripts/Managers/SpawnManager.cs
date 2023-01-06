@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    #region Properties
+        
     public List<GeoChild> _geoChilds;
     public List<Food> _foods;
     [SerializeField] GameObject prefabGeoChild;
     [SerializeField] GameObject prefabFood;
 
-    public SpawnManager()
-    {
-        _geoChilds = new List<GeoChild>();
-        _foods = new List<Food>();
-    }
+    GameManager _gameManager;
 
     public List<GeoChild> GeoChildren
     {
@@ -31,8 +29,29 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    #endregion
+    
+    #region Constructors
+        
+    void Awake()
+    {
+        _gameManager = GetComponent<GameManager>();    
+    }
+
+    public SpawnManager()
+    {
+        _geoChilds = new List<GeoChild>();
+        _foods = new List<Food>();
+    }
+
+    #endregion
+
+    #region Methods
+        
     public void SpawnChild()
     {
         Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
     }
+    
+    #endregion
 }
