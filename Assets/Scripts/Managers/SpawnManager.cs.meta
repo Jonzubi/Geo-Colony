@@ -3,7 +3,9 @@ guid: 7df949f35d4003643ac020e533f08fd1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefabGeoChild: {fileID: 6338743288258868559, guid: b042cde09eb4003458348f3bfcd369fd, type: 3}
+  - prefabFood: {fileID: 5744475245973071958, guid: 71a425a18b2f65d498157a363cd80d04, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
