@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConfigurationManager : MonoBehaviour
 {
-    float _spawnFoodTime = 0.1f;
+    float _spawnFoodTime = 5;
 
     public float SpawnFoodTime
     {
