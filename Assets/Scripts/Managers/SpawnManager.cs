@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class SpawnManager : MonoBehaviour
         if (lastFoodSpawn >= _gameManager.GetConfigurationManager().SpawnFoodTime)
         {
             GameObject food = Instantiate(prefabFood, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+            int maxId = Foods.Max(f => f.GetComponent<Food>().Id);
+            food.GetComponent<Food>().Id = maxId + 1;
             Foods.Add(food);
             lastFoodSpawn = 0;
         }
