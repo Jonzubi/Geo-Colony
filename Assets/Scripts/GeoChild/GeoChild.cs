@@ -4,10 +4,27 @@ using UnityEngine;
 
 public class GeoChild : MonoBehaviour
 {
+    public int Id
+    {
+        get; set;
+    }
     float _moveSpeed = 30f;
+    
     public string Name
     {
         get; set;
+    }
+
+    public int FoodEaten
+    {
+        get; set;
+    }
+
+    GameManager _gameManager;
+
+    void Awake()
+    {
+        _gameManager = FindObjectOfType<GameManager>();    
     }
 
     public float GetMoveSpeed()
@@ -17,6 +34,10 @@ public class GeoChild : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision");    
+        if (other.gameObject.tag == "Food")
+        {
+            FoodEaten++;
+            _gameManager.GetSpawnManager().DestroyChild(other.gameObject.GetComponent<Food>().Id);
+        }
     }
 }
