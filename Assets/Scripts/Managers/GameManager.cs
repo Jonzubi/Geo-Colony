@@ -5,16 +5,28 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _gameManager;
-    public static SpawnManager _spawnManager;
+    SpawnManager _spawnManager;
+    ConfigurationManager _configurationManager;
+
+    void Awake()
+    {
+        _spawnManager = GetComponent<SpawnManager>();
+        _configurationManager = GetComponent<ConfigurationManager>();
+        _gameManager = this;    
+    }
     
     public static GameManager GetGameManager()
     {
-        if (_gameManager == null)
-        {
-            _gameManager = new GameManager();
-            _spawnManager = new SpawnManager();
-        }
-
         return _gameManager;
+    }
+
+    public SpawnManager GetSpawnManager()
+    {
+        return _spawnManager;
+    }
+
+    public ConfigurationManager GetConfigurationManager()
+    {
+        return _configurationManager;
     }
 }
