@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6338743288258868556}
   - component: {fileID: 6338743288258868557}
   - component: {fileID: 6338743288258868558}
+  - component: {fileID: 7235391740169312557}
+  - component: {fileID: 7209965240828988882}
   m_Layer: 0
   m_Name: GeoChild
   m_TagString: Untagged
@@ -110,3 +112,28 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7235391740169312557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338743288258868559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16945e8463bc664489be51c8f54b931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7209965240828988882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338743288258868559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ad8e3170db61c4db39ab0dad61dddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomIdleMoveSeconds: 1
