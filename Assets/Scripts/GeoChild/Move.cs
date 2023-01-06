@@ -49,9 +49,10 @@ public class Move : MonoBehaviour
                     pickedRandomPointTime += Time.deltaTime;
             }
 
-            float step = _geoChild.GetMoveSpeed() * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, randomPoint, step);
+            MoveToTarget(randomPoint);
         }
+        else
+            MoveToTarget(targetFood.transform.position);
     }
 
     GameObject? GetClosestFood()
@@ -69,5 +70,11 @@ public class Move : MonoBehaviour
             }
         }
         return closestFood;
+    }
+
+    void MoveToTarget(Vector2 target)
+    {
+        float step = _geoChild.GetMoveSpeed() * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, target, step);
     }
 }
