@@ -30,4 +30,9 @@ public class SpawnManager : MonoBehaviour
             return _foods;
         }
     }
+
+    public void SpawnChild()
+    {
+        Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+    }
 }

@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
         _configurationManager = GetComponent<ConfigurationManager>();
         _gameManager = this;    
     }
+
+    void Start()
+    {
+        if (_spawnManager.GeoChildren.Count == 0)
+            _spawnManager.SpawnChild();    
+    }
     
     public static GameManager GetGameManager()
     {
