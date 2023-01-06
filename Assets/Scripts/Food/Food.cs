@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    
+    public int Id
+    {
+        get; set;
+    }
 }
