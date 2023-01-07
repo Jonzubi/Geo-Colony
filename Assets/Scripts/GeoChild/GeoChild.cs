@@ -8,7 +8,7 @@ public class GeoChild : MonoBehaviour
     [SerializeField] TextMeshPro tmpName;
     public int Id { get; set; }
     float _moveSpeed = 30f;
-    float _visionDistance = 7.5f;
+    float _visionDistance = 5f;
     public int MitosisOn { get; set; } = 3;
     
     string _name = "";
