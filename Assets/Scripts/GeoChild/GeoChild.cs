@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class GeoChild : MonoBehaviour
 {
-    public int Id
-    {
-        get; set;
-    }
+    public int Id { get; set; }
     float _moveSpeed = 30f;
+    public int MitosisOn { get; set; } = 10;
     
-    public string Name
-    {
-        get; set;
-    }
+    public string Name { get; set; }
 
-    public int FoodEaten
-    {
-        get; set;
-    }
+    public int FoodEaten { get; set; }
 
     GameManager _gameManager;
 
@@ -36,8 +28,13 @@ public class GeoChild : MonoBehaviour
     {
         if (other.gameObject.tag == "Food")
         {
-            FoodEaten++;
             _gameManager.GetSpawnManager().DestroyChild(other.gameObject.GetComponent<Food>().Id);
+            FoodEaten++;
+            if (FoodEaten == MitosisOn)
+            {
+                _gameManager.GetSpawnManager().MitosisChild(Id);
+                FoodEaten = 0;
+            }
         }
     }
 }
