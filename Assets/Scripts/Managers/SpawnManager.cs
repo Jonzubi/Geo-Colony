@@ -66,10 +66,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject SpawnChild(Vector2? position = null)
     {
         Vector2 auxPos = position != null ? (Vector2)position : CommonFunctions.GetRandomPositionInCamera();
-        GameObject geoChild = Instantiate(prefabGeoChild, auxPos, new Quaternion());
-        geoChild.GetComponent<GeoChild>().Id = GetNextGeoChildId();
-        GeoChildren.Add(geoChild);
-        return geoChild;
+        GameObject geoChildgo = Instantiate(prefabGeoChild, auxPos, new Quaternion());
+        GeoChild geoChild = geoChildgo.GetComponent<GeoChild>();
+        geoChild.Id = GetNextGeoChildId();
+        geoChild.Name = $"#{geoChild.Id}";
+        GeoChildren.Add(geoChildgo);
+        return geoChildgo;
     }
 
     public void DestroyChild(int id)
