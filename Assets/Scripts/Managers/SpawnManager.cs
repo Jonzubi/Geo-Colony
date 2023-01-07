@@ -45,11 +45,7 @@ public class SpawnManager : MonoBehaviour
         if (lastFoodSpawn >= _gameManager.GetConfigurationManager().SpawnFoodTime)
         {
             GameObject food = Instantiate(prefabFood, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
-            int maxId = 0;
-            if (Foods.Count > 0)
-                maxId = Foods.Max(f => f.GetComponent<Food>().Id);
-
-            food.GetComponent<Food>().Id = maxId + 1;
+            food.GetComponent<Food>().Id = GetNextFoodId();
             Foods.Add(food);
             lastFoodSpawn = 0;
         }
@@ -70,11 +66,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnChild()
     {
         GameObject geoChild = Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
-        int maxId = 0;
-        if (GeoChildren.Count > 0)
-            maxId = GeoChildren.Max(f => f.GetComponent<GeoChild>().Id);
-
-        geoChild.GetComponent<GeoChild>().Id = maxId + 1;
+        geoChild.GetComponent<GeoChild>().Id = GetNextGeoChildId();
         GeoChildren.Add(geoChild);
     }
 
@@ -89,6 +81,22 @@ public class SpawnManager : MonoBehaviour
     {
         GameObject geoChild = GeoChildren.Find(g => g.GetComponent<GeoChild>().Id == id);
         StartCoroutine(MitosisEffect(geoChild));
+    }
+
+    int GetNextFoodId()
+    {
+        int maxId = 0;
+        if (Foods.Count > 0)
+            maxId = Foods.Max(f => f.GetComponent<Food>().Id);
+        return maxId + 1;
+    }
+
+    int GetNextGeoChildId()
+    {
+        int maxId = 0;
+        if (GeoChildren.Count > 0)
+            maxId = GeoChildren.Max(f => f.GetComponent<GeoChild>().Id);
+        return maxId + 1;
     }
 
     #endregion
