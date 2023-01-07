@@ -78,4 +78,14 @@ public class Move : MonoBehaviour
         float step = _geoChild.GetMoveSpeed() * Time.deltaTime;
         _rigidBody.MovePosition(Vector2.MoveTowards(transform.position, target, step));
     }
+
+    public Vector2? GetTargetFoodPosition()
+    {
+        return targetFood?.transform.position;
+    }
+
+    public Vector2? GetRandomPointPosition()
+    {
+        return randomPoint;
+    }
 }
