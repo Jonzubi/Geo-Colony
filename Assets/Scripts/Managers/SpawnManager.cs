@@ -70,6 +70,11 @@ public class SpawnManager : MonoBehaviour
     public void SpawnChild()
     {
         GameObject geoChild = Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+        int maxId = 0;
+        if (GeoChildren.Count > 0)
+            maxId = GeoChildren.Max(f => f.GetComponent<GeoChild>().Id);
+
+        geoChild.GetComponent<GeoChild>().Id = maxId + 1;
         GeoChildren.Add(geoChild);
     }
 
@@ -80,5 +85,22 @@ public class SpawnManager : MonoBehaviour
         Destroy(food);
     }
 
+    public void MitosisChild(int id)
+    {
+        GameObject geoChild = GeoChildren.Find(g => g.GetComponent<GeoChild>().Id == id);
+        StartCoroutine(MitosisEffect(geoChild));
+    }
+
+    #endregion
+
+    #region Corroutines
+    IEnumerator MitosisEffect(GameObject geoChild)
+    {
+        float transition = 0.5f;
+        LeanTween.scale(geoChild, new Vector3(0.1f, 0.1f, 0.1f), transition);
+        yield return new WaitForSeconds(transition);
+        LeanTween.scale(geoChild, new Vector3(1, 1, 1), transition);
+        yield return new WaitForSeconds(transition);
+    }
     #endregion
 }
