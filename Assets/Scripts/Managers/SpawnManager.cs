@@ -63,11 +63,13 @@ public class SpawnManager : MonoBehaviour
 
     #region Methods
         
-    public void SpawnChild()
+    public GameObject SpawnChild(Vector2? position = null)
     {
-        GameObject geoChild = Instantiate(prefabGeoChild, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+        Vector2 auxPos = position != null ? (Vector2)position : CommonFunctions.GetRandomPositionInCamera();
+        GameObject geoChild = Instantiate(prefabGeoChild, auxPos, new Quaternion());
         geoChild.GetComponent<GeoChild>().Id = GetNextGeoChildId();
         GeoChildren.Add(geoChild);
+        return geoChild;
     }
 
     public void DestroyChild(int id)
@@ -109,6 +111,9 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(transition);
         LeanTween.scale(geoChild, new Vector3(1, 1, 1), transition);
         yield return new WaitForSeconds(transition);
+        Vector2 auxPos = geoChild.transform.position;
+        auxPos.x = auxPos.x - 0.2f;
+        GameObject newChild = SpawnChild(auxPos);
     }
     #endregion
 }
