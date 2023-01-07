@@ -64,7 +64,7 @@ public class Move : MonoBehaviour
         foreach (var food in foods)
         {
             float dist = Vector2.Distance(food.transform.position, transform.position);
-            if (minDist > dist)
+            if (minDist > dist && _geoChild.GetVisionDistance() > dist)
             {
                 closestFood = food;
                 minDist = dist;
