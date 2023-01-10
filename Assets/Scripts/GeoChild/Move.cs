@@ -36,14 +36,14 @@ public class Move : MonoBehaviour
         {
             // Random movement
             if (randomPoint == null)
-                randomPoint = CommonFunctions.GetRandomPositionInCamera();
+                randomPoint = CommonFunctions.GetRandomPositionInGameRange();
             else
             {
                 // Check last time point election
                 if (pickedRandomPointTime >= randomIdleMoveSeconds)
                 {
                     // Pick new point
-                    randomPoint = CommonFunctions.GetRandomPositionInCamera();
+                    randomPoint = CommonFunctions.GetRandomPositionInGameRange();
                     pickedRandomPointTime = 0;
                 }
                 else
