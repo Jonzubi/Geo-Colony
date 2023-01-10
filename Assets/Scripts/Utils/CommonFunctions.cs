@@ -5,6 +5,10 @@ using UnityEngine;
 public class CommonFunctions
 {
     public static Camera mainCamera;
+    public static GameManager _gameManager;
+    public static SpawnManager _spawnManager;
+    public static ConfigurationManager _configManager;
+
     public static Vector2 GetRandomPositionInCamera()
     {
         float spawnY = Random.Range
@@ -22,5 +26,18 @@ public class CommonFunctions
         if (mainCamera == null)
             mainCamera = Camera.main;
         return mainCamera;
+    }
+
+    public static Vector2 GetRandomPositionInGameRange()
+    {
+        if (_gameManager == null)
+        {
+            _gameManager = GameManager.GetGameManager();
+            _spawnManager = _gameManager.GetSpawnManager();
+            _configManager = _gameManager.GetConfigurationManager();
+        }
+
+        int geoChildsCount = _spawnManager._geoChilds.Count; 
+        return Random.insideUnitCircle * geoChildsCount * _configManager.IncreasePerGeoChild;
     }
 }
