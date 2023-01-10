@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cinemachineVirtualCamera: {fileID: 605611091}
   zoomScale: 1
-  moveScale: 1
+  moveScale: 2
 --- !u!1 &548533999
 GameObject:
   m_ObjectHideFlags: 3
