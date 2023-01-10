@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (lastFoodSpawn >= _gameManager.GetConfigurationManager().SpawnFoodTime)
         {
-            GameObject food = Instantiate(prefabFood, CommonFunctions.GetRandomPositionInCamera(), new Quaternion());
+            GameObject food = Instantiate(prefabFood, CommonFunctions.GetRandomPositionInGameRange(), new Quaternion());
             food.GetComponent<Food>().Id = GetNextFoodId();
             Foods.Add(food);
             lastFoodSpawn = 0;
@@ -65,7 +65,7 @@ public class SpawnManager : MonoBehaviour
         
     public GameObject SpawnChild(Vector2? position = null)
     {
-        Vector2 auxPos = position != null ? (Vector2)position : CommonFunctions.GetRandomPositionInCamera();
+        Vector2 auxPos = position != null ? (Vector2)position : CommonFunctions.GetRandomPositionInGameRange();
         GameObject geoChildgo = Instantiate(prefabGeoChild, auxPos, new Quaternion());
         GeoChild geoChild = geoChildgo.GetComponent<GeoChild>();
         geoChild.Id = GetNextGeoChildId();
